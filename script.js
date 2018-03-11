@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Twitch Volume Mute Fix
 // @namespace    https://github.com/Nyqi/twitch-volume-safari-fix
-// @version      1.0.0
+// @version      1.0.1
 // @description  Fixes bug when volume is automatically muted on Safari
 // @author       Zedgar
 // @match        *://twitch.tv/*
@@ -14,5 +14,9 @@
 // ==/UserScript==
 
 $(document).ready(() => {
-  $('.qa-control-volume').click();
+    // Unmute even after changing stream
+    $(document).on('DOMSubtreeModified', 'video', () => {
+        if ($('.mute-button').has('svg.player-icon-volumefull').length == false) $('.qa-control-volume').click();
+    });
 });
+

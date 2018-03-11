@@ -1,0 +1,1 @@
+# twitch-volume-safari-fix
